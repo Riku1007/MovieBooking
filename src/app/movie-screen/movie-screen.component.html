@@ -1,0 +1,44 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alkalami&display=swap" rel="stylesheet">
+<link href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+
+
+
+<div *ngIf="init;else show"><h1 style="text-align: center; margin-top: 200px; color: aliceblue;">LOADING......</h1></div>
+<ng-template #show>
+    <div class="parent-div">
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div *ngFor="let a of arr">
+                <div class="card box" style="width: 300px; text-align: center;">
+                    <img id = "wrap" class="card-img-top" src={{a.Image}} alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title flux" style="color: white;">{{a.Movie_name}}</h5>
+                        
+                    </div>
+                    
+                    <div class="card-body">
+                        <div>
+                        <button [routerLink]="['/bookTicket',a.id]" [state]="{data: a}" class="custom-btn btn-3"><span>Book Ticket
+                            Now </span></button>
+                            <a href={{a.Trailer}} target="_blank"><button class="custom-btn btn-3" style="width: 30px; margin-left: 20px;"><i class="fa-solid fa-play"></i></button></a>
+                        </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,198 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+  integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<div class="container">
+  <form>
+    <div class="row">
+      <h4>User Details</h4>
+      <div class="input-group input-group-icon">
+        <input
+          [(ngModel)]="data1"
+          type="text"
+          placeholder="Full Name"
+          name="fullName"
+        />
+        <div class="input-icon"><i class="fa fa-user"></i></div>
+      </div>
+      <div class="input-group input-group-icon">
+        <input
+          [(ngModel)]="data2"
+          type="email"
+          placeholder="Email Address"
+          name="email"
+          required
+        />
+        <div class="input-icon"><i class="fa fa-envelope"></i></div>
+      </div>
+      <div class="input-group input-group-icon">
+        <input
+          type="number"
+          placeholder="+91"
+          (change)="mobCheck($event)"
+          name="phone"
+          required
+        />
+        <div *ngIf="verify; else unverify" class="input-icon">
+          <i class="fa-solid fa-phone" style="color: green"></i>
+        </div>
+        <ng-template #unverify
+          ><div class="input-icon">
+            <i class="fa-solid fa-phone" style="color: red"></i></div
+        ></ng-template>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-half">
+        <h4>Date of Screening</h4>
+        <div class="input-group">
+          <div class="col-third">
+            <input
+              [(ngModel)]="data4"
+              type="number"
+              placeholder="DD"
+              name="dd"
+            />
+          </div>
+          <div class="col-third">
+            <input
+              [(ngModel)]="data5"
+              type="number"
+              placeholder="MM"
+              name="mm"
+            />
+          </div>
+          <div class="col-third">
+            <input
+              [(ngModel)]="data6"
+              type="number"
+              placeholder="YYYY"
+              name="yyyy"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-half">
+        <h4>Gender</h4>
+        <div class="input-group">
+          <input
+            [(ngModel)]="data7"
+            id="gender-male"
+            type="radio"
+            name="gender"
+            value="male"
+          />
+          <label for="gender-male">Male</label>
+          <input
+            [(ngModel)]="data7"
+            id="gender-female"
+            type="radio"
+            name="gender"
+            value="female"
+          />
+          <label for="gender-female">Female</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h4>Show Timings</h4>
+      <div class="input-group-timing">
+        <input
+          (change)="onChange($event)"
+          id="morning"
+          type="radio"
+          name="timing"
+          value="0"
+        />
+        <label for="morning"><span>Morning</span></label>
+        <input
+          (change)="onChange($event)"
+          id="noon"
+          type="radio"
+          name="timing"
+          value="1"
+        />
+        <label for="noon"> <span>Noon</span></label>
+        <input
+          (change)="onChange($event)"
+          id="evening"
+          type="radio"
+          name="timing"
+          value="2"
+        />
+        <label for="evening"> <span>Evening</span></label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-half">
+        <h4>Seats Required</h4>
+        <div class="input-group">
+          <div class="col-third">
+            <input
+              type="number"
+              style="width: 260px"
+              [(ngModel)]="seats"
+              name="seatsReq"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-half">
+        <h4>Seats Available</h4>
+        <div class="input-group">
+          <div class="col-third">
+            <input
+              type="number"
+              style="width: 270px"
+              disabled
+              value="{{ data.Seats[yourModel] - seats }}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-half">
+        <h4>Price Per Ticket(in Rs.)</h4>
+        <div class="input-group">
+          <div class="col-third">
+            <input
+              type="number"
+              style="width: 260px"
+              value="{{ data.Price[yourModel] }}"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-half">
+        <h4>Total Price(in Rs.)</h4>
+        <div class="input-group">
+          <div class="col-third">
+            <input
+              type="number"
+              style="width: 270px"
+              value="{{ seats * data.Price[yourModel] }}"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="checkValidation(); else disable">
+      <button
+        class="submit-form"
+        [routerLink]="['/submit']"
+        [state]="{ data: dummy }"
+      >
+        Submit
+      </button>
+    </div>
+    <ng-template #disable>
+      <button class="submit-form" disabled>Submit</button>
+    </ng-template>
+  </form>
+</div>
